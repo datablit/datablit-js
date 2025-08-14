@@ -1,6 +1,6 @@
 {
   "name": "@datablit/datablit-js",
-  "version": "1.0.1-dev.13",
+  "version": "1.0.1",
   "description": "Datablit JavaScript SDK for analytics, rules, and experiments",
   "main": "dist/index.global.js",
   "module": "dist/index.mjs",
