@@ -143,57 +143,57 @@ async function evaluateRules() {
 
     try {
         // Basic rule evaluation
-        const basicRule = await datablit.rule.evalRule({
-            key: 'fer',
-            userId: 'user123',
-            params: {
+        const basicRule = await datablit.rule.evalRule(
+            'fer',
+            'user123',
+            {
                 os_name: 'android'
             }
-        });
+        );
 
-        console.log('Basic rule result:', basicRule.result);
+        console.log('Basic rule result:', basicRule);
 
         // Premium user rule
-        const premiumRule = await datablit.rule.evalRule({
-            key: 'premium_user',
-            userId: 'user123',
-            params: {
+        const premiumRule = await datablit.rule.evalRule(
+            'premium_user',
+            'user123',
+            {
                 plan: 'premium',
                 location: 'US',
                 device: 'mobile',
                 isLoggedIn: true,
                 lastLoginDate: '2024-01-20'
             }
-        });
+        );
 
-        console.log('Premium user rule result:', premiumRule.result);
+        console.log('Premium user rule result:', premiumRule);
 
         // New user rule
-        const newUserRule = await datablit.rule.evalRule({
-            key: 'new_user',
-            userId: 'user456',
-            params: {
+        const newUserRule = await datablit.rule.evalRule(
+            'new_user',
+            'user456',
+            {
                 signupDate: '2024-01-15',
                 isNewUser: true,
                 location: 'CA'
             }
-        });
+        );
 
-        console.log('New user rule result:', newUserRule.result);
+        console.log('New user rule result:', newUserRule);
 
         // High value customer rule
-        const highValueRule = await datablit.rule.evalRule({
-            key: 'high_value_customer',
-            userId: 'user789',
-            params: {
+        const highValueRule = await datablit.rule.evalRule(
+            'high_value_customer',
+            'user789',
+            {
                 totalSpent: 5000,
                 orderCount: 25,
                 plan: 'premium',
                 location: 'US'
             }
-        });
+        );
 
-        console.log('High value customer rule result:', highValueRule.result);
+        console.log('High value customer rule result:', highValueRule);
 
         console.log('✅ Rules evaluated successfully');
     } catch (error) {
@@ -213,28 +213,28 @@ async function getExperimentVariants() {
 
     try {
         // Button color experiment
-        const buttonExperiment = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user123'
-        });
+        const buttonExperiment = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user123'
+        );
 
-        console.log('Button color experiment:', buttonExperiment.variant);
+        console.log('Button color experiment:', buttonExperiment);
 
         // Pricing experiment
-        const pricingExperiment = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user456'
-        });
+        const pricingExperiment = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user456'
+        );
 
-        console.log('Pricing experiment:', pricingExperiment.variant);
+        console.log('Pricing experiment:', pricingExperiment);
 
         // Feature flag experiment
-        const featureExperiment = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user789'
-        });
+        const featureExperiment = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user789'
+        );
 
-        console.log('Feature flag experiment:', featureExperiment.variant);
+        console.log('Feature flag experiment:', featureExperiment);
 
         console.log('✅ Experiment variants retrieved successfully');
     } catch (error) {
@@ -270,32 +270,30 @@ async function completeUserJourney() {
         });
 
         // 3. Evaluate rules for personalization
-        const personalizationRule = await datablit.rule.evalRule({
-            key: 'show_premium_features',
-            userId: userId,
-            params: {
+        const personalizationRule = await datablit.rule.evalRule(
+            'show_premium_features',
+            userId,
+            {
                 plan: 'premium',
                 location: 'US'
             }
-        });
+        );
 
         // 4. Get experiment variant
-        const experimentVariant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: userId
-        });
+        const expId = '01K2JKVXR0J0ZWPX40XY8CAWBS';
+        const experimentVariant = await datablit.experiment.getVariant(expId, userId);
 
         // 5. Track user actions based on rules and experiments
-        if (personalizationRule.result) {
+        if (personalizationRule) {
             datablit.track('Premium Feature Shown', {
                 feature: 'advanced_search',
                 userId: userId
             });
         }
 
-        if (experimentVariant.variant === 'variant_a') {
+        if (experimentVariant === 'variant_a') {
             datablit.track('Experiment Variant A Shown', {
-                experimentId: experimentVariant.expId,
+                experimentId: expId,
                 userId: userId
             });
         }
@@ -336,20 +334,14 @@ async function errorHandlingExamples() {
 
     // Handle rule evaluation errors
     try {
-        await datablit.rule.evalRule({
-            key: 'non_existent_rule',
-            userId: 'user123'
-        });
+        await datablit.rule.evalRule('non_existent_rule', 'user123');
     } catch (error) {
         console.log('Expected rule evaluation error:', error.message);
     }
 
     // Handle experiment errors
     try {
-        await datablit.experiment.getVariant({
-            expId: 'invalid_experiment_id',
-            entityId: 'user123'
-        });
+        await datablit.experiment.getVariant('invalid_experiment_id', 'user123');
     } catch (error) {
         console.log('Expected experiment error:', error.message);
     }

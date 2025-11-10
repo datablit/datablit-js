@@ -22,15 +22,12 @@ async function basicVariantAssignment() {
     console.log('🧪 Basic Variant Assignment...');
 
     try {
-        const variant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user123'
-        });
+        const variant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user123'
+        );
 
-        console.log('Experiment variant:', variant);
-        console.log('Experiment ID:', variant.expId);
-        console.log('Entity ID:', variant.entityId);
-        console.log('Assigned variant:', variant.variant);
+        console.log('Assigned variant:', variant);
 
         console.log('✅ Basic variant assignment completed');
     } catch (error) {
@@ -46,26 +43,26 @@ async function differentEntityTypes() {
 
     try {
         // User-based experiment
-        const userVariant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user123'
-        });
+        const userVariant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user123'
+        );
 
         // Session-based experiment
-        const sessionVariant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'session_456'
-        });
+        const sessionVariant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'session_456'
+        );
 
         // Device-based experiment
-        const deviceVariant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'device_789'
-        });
+        const deviceVariant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'device_789'
+        );
 
-        console.log('User variant:', userVariant.variant);
-        console.log('Session variant:', sessionVariant.variant);
-        console.log('Device variant:', deviceVariant.variant);
+        console.log('User variant:', userVariant);
+        console.log('Session variant:', sessionVariant);
+        console.log('Device variant:', deviceVariant);
 
         console.log('✅ Different entity types completed');
     } catch (error) {
@@ -84,13 +81,13 @@ async function buttonColorABTest() {
     console.log('🎨 Button Color A/B Test...');
 
     try {
-        const variant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user123'
-        });
+        const variant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user123'
+        );
 
         // Apply variant based on assignment
-        switch (variant.variant) {
+        switch (variant) {
             case 'control':
                 console.log('Showing blue button (control)');
                 // applyBlueButton();
@@ -121,13 +118,13 @@ async function pricingABTest() {
     console.log('💰 Pricing A/B Test...');
 
     try {
-        const variant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user456'
-        });
+        const variant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user456'
+        );
 
         // Apply pricing based on variant
-        switch (variant.variant) {
+        switch (variant) {
             case 'control':
                 console.log('Showing original pricing ($99/month)');
                 // showOriginalPricing();
@@ -158,13 +155,13 @@ async function landingPageABTest() {
     console.log('🏠 Landing Page A/B Test...');
 
     try {
-        const variant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user789'
-        });
+        const variant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user789'
+        );
 
         // Apply landing page variant
-        switch (variant.variant) {
+        switch (variant) {
             case 'control':
                 console.log('Showing original landing page');
                 // showOriginalLandingPage();
@@ -199,13 +196,13 @@ async function featureFlagExperiment() {
     console.log('🚩 Feature Flag Experiment...');
 
     try {
-        const variant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user101'
-        });
+        const variant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user101'
+        );
 
         // Enable/disable features based on variant
-        if (variant.variant === 'control') {
+        if (variant === 'control') {
             console.log('Feature flag: OFF (control group)');
             // disableNewFeature();
         } else {
@@ -226,13 +223,13 @@ async function gradualFeatureRollout() {
     console.log('📈 Gradual Feature Rollout...');
 
     try {
-        const variant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user202'
-        });
+        const variant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user202'
+        );
 
         // Gradual rollout based on variant
-        switch (variant.variant) {
+        switch (variant) {
             case 'control':
                 console.log('New feature: 0% rollout (control)');
                 // showOldFeature();
@@ -275,10 +272,10 @@ async function multiVariantExperiment() {
     console.log('🔬 Multi-Variant Experiment...');
 
     try {
-        const variant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user303'
-        });
+        const variant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user303'
+        );
 
         // Handle multiple variants
         const variantConfig = {
@@ -304,7 +301,7 @@ async function multiVariantExperiment() {
             }
         };
 
-        const selectedVariant = variantConfig[variant.variant] || variantConfig.control;
+        const selectedVariant = variantConfig[variant] || variantConfig.control;
         console.log(`Selected variant: ${selectedVariant.name} - ${selectedVariant.description}`);
         console.log('Variant config:', selectedVariant.config);
 
@@ -321,10 +318,10 @@ async function emailSubjectLineExperiment() {
     console.log('📧 Email Subject Line Experiment...');
 
     try {
-        const variant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user404'
-        });
+        const variant = await datablit.experiment.getVariant(
+            '01K2JKVXR0J0ZWPX40XY8CAWBS',
+            'user404'
+        );
 
         // Email subject lines for different variants
         const subjectLines = {
@@ -335,7 +332,7 @@ async function emailSubjectLineExperiment() {
             variant_d: 'Your success story starts here'
         };
 
-        const subjectLine = subjectLines[variant.variant] || subjectLines.control;
+        const subjectLine = subjectLines[variant] || subjectLines.control;
         console.log(`Email subject line: "${subjectLine}"`);
 
         console.log('✅ Email subject line experiment completed');
@@ -360,12 +357,12 @@ async function batchVariantAssignment() {
 
         // Assign variants to multiple users
         for (const userId of userIds) {
-            const variant = await datablit.experiment.getVariant({
-                expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-                entityId: userId
-            });
+            const variant = await datablit.experiment.getVariant(
+                '01K2JKVXR0J0ZWPX40XY8CAWBS',
+                userId
+            );
 
-            results[userId] = variant.variant;
+            results[userId] = variant;
         }
 
         console.log('Batch variant assignment results:');
@@ -405,12 +402,12 @@ async function multipleExperimentsForUser() {
 
         // Get variants for multiple experiments
         for (const experiment of experiments) {
-            const variant = await datablit.experiment.getVariant({
-                expId: experiment.expId,
-                entityId: userId
-            });
+            const variant = await datablit.experiment.getVariant(
+                experiment.expId,
+                userId
+            );
 
-            results[experiment.name] = variant.variant;
+            results[experiment.name] = variant;
         }
 
         console.log('Multiple experiment results:');
@@ -436,10 +433,7 @@ async function errorHandlingExamples() {
 
     // Test with invalid experiment ID
     try {
-        await datablit.experiment.getVariant({
-            expId: 'invalid_experiment_id',
-            entityId: 'user123'
-        });
+        await datablit.experiment.getVariant('invalid_experiment_id', 'user123');
     } catch (error) {
         console.log('Expected error for invalid experiment ID:', error.message);
     }
@@ -448,20 +442,14 @@ async function errorHandlingExamples() {
     try {
         const tempExperiment = new (await import('@datablit/datablit-js')).Experiment();
         tempExperiment.setApiKey('invalid-key');
-        await tempExperiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: 'user123'
-        });
+        await tempExperiment.getVariant('01K2JKVXR0J0ZWPX40XY8CAWBS', 'user123');
     } catch (error) {
         console.log('Expected error for invalid API key:', error.message);
     }
 
     // Test with missing required parameters
     try {
-        await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS'
-            // Missing entityId
-        });
+        await datablit.experiment.getVariant('01K2JKVXR0J0ZWPX40XY8CAWBS');
     } catch (error) {
         console.log('Expected error for missing entityId:', error.message);
     }
@@ -489,24 +477,22 @@ async function integrateWithAnalytics() {
         });
 
         // 2. Get experiment variant
-        const variant = await datablit.experiment.getVariant({
-            expId: '01K2JKVXR0J0ZWPX40XY8CAWBS',
-            entityId: userId
-        });
+        const expId = '01K2JKVXR0J0ZWPX40XY8CAWBS';
+        const variant = await datablit.experiment.getVariant(expId, userId);
 
         // 3. Track experiment exposure
         datablit.track('Experiment Viewed', {
-            experimentId: variant.expId,
-            variant: variant.variant,
+            experimentId: expId,
+            variant: variant,
             userId: userId
         });
 
         // 4. Track user actions based on variant
-        if (variant.variant === 'variant_a') {
+        if (variant === 'variant_a') {
             datablit.track('New Feature Used', {
                 feature: 'enhanced_search',
-                experimentId: variant.expId,
-                variant: variant.variant,
+                experimentId: expId,
+                variant: variant,
                 userId: userId
             });
         }
@@ -515,8 +501,8 @@ async function integrateWithAnalytics() {
         datablit.track('Purchase Completed', {
             orderId: 'order_123',
             amount: 99.99,
-            experimentId: variant.expId,
-            variant: variant.variant,
+            experimentId: expId,
+            variant: variant,
             userId: userId
         });
 

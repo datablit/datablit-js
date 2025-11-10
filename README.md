@@ -25,21 +25,19 @@ datablit.track("Button Clicked", { buttonId: "signup-button" });
 datablit.identify("user123", { email: "user@example.com", plan: "premium" });
 
 // Evaluate rules
-const ruleResult = await datablit.rule.evalRule({
-  key: "fer",
-  userId: "1",
-  params: {
-    os_name: "android",
-  },
+const ruleResult = await datablit.rule.evalRule("fer", "1", {
+  os_name: "android",
 });
 
-console.log("Rule result:", ruleResult.result); // true or false
+console.log("Rule result:", ruleResult); // true or false
 
 // Get experiment variant
-const variant = await datablit.experiment.getVariant({
-  expId: "01K2JKVXR0J0ZWPX40XY8CAWBS",
-  entityId: "1",
-});
+const variant = await datablit.experiment.getVariant(
+  "01K2JKVXR0J0ZWPX40XY8CAWBS",
+  "1"
+);
+
+console.log("Variant:", variant); // "control", "variant_a", etc.
 ```
 
 ## Features
@@ -108,20 +106,16 @@ datablit.identify("user123", {
 
 Access rules functionality through `datablit.rule`:
 
-#### `datablit.rule.evalRule(request)`
+#### `datablit.rule.evalRule(key, userId, params?)`
 
-Evaluate a rule for a given user and context. Returns the evaluation result with key, userId, and result.
+Evaluate a rule for a given user and context. Returns a boolean indicating the evaluation result.
 
 ```javascript
-const ruleResult = await datablit.rule.evalRule({
-  key: "fer",
-  userId: "1",
-  params: {
-    os_name: "android",
-  },
+const ruleResult = await datablit.rule.evalRule("fer", "1", {
+  os_name: "android",
 });
 
-if (ruleResult.result) {
+if (ruleResult) {
   console.log("Rule evaluated to true");
 } else {
   console.log("Rule evaluated to false");
@@ -132,17 +126,17 @@ if (ruleResult.result) {
 
 Access experiments functionality through `datablit.experiment`:
 
-#### `datablit.experiment.getVariant(request)`
+#### `datablit.experiment.getVariant(expId, entityId)`
 
-Get experiment variant for a user.
+Get experiment variant for a user. Returns the variant string assigned to the entity.
 
 ```javascript
-const variant = await datablit.experiment.getVariant({
-  expId: "01K2JKVXR0J0ZWPX40XY8CAWBS",
-  entityId: "1",
-});
+const variant = await datablit.experiment.getVariant(
+  "01K2JKVXR0J0ZWPX40XY8CAWBS",
+  "1"
+);
 
-console.log("User is in variant:", variant.variant); // "control", "variant_a", etc.
+console.log("User is in variant:", variant); // "control", "variant_a", etc.
 ```
 
 ## Advanced Usage
@@ -153,19 +147,16 @@ The SDK provides comprehensive error handling:
 
 ```javascript
 try {
-  const ruleResult = await datablit.rule.evalRule({
-    key: "fer",
-    userId: "1",
-  });
+  const ruleResult = await datablit.rule.evalRule("fer", "1");
 } catch (error) {
   console.error("Failed to evaluate rules:", error.message);
 }
 
 try {
-  const variant = await datablit.experiment.getVariant({
-    expId: "01K2JKVXR0J0ZWPX40XY8CAWBS",
-    entityId: "1",
-  });
+  const variant = await datablit.experiment.getVariant(
+    "01K2JKVXR0J0ZWPX40XY8CAWBS",
+    "1"
+  );
 } catch (error) {
   console.error("Failed to get variant:", error.message);
 }

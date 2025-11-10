@@ -14,15 +14,17 @@ export interface GetVariantResponse {
 export class Experiment extends BaseAPI {
     /**
      * Get experiment variant for a user
+     * Returns the variant string assigned to the entity
      */
-    public async getVariant(request: GetVariantRequest): Promise<GetVariantResponse> {
+    public async getVariant(expId: string, entityId: string): Promise<string> {
         const queryParams = new URLSearchParams({
-            expId: request.expId,
-            entityId: request.entityId
+            expId,
+            entityId
         });
 
-        return this.makeRequest(`/api/1.0/experiment/variant?${queryParams.toString()}`, {
+        const response = await this.makeRequest(`/api/1.0/experiment/variant?${queryParams.toString()}`, {
             method: 'GET'
         });
+        return response.variant;
     }
 }

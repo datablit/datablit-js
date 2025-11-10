@@ -22,18 +22,15 @@ async function basicRuleEvaluation() {
     console.log('🔍 Basic Rule Evaluation...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'fer',
-            userId: 'user123',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'fer',
+            'user123',
+            {
                 os_name: 'android'
             }
-        });
+        );
 
         console.log('Basic rule result:', result);
-        console.log('Rule key:', result.key);
-        console.log('User ID:', result.userId);
-        console.log('Result:', result.result);
 
         console.log('✅ Basic rule evaluation completed');
     } catch (error) {
@@ -48,10 +45,10 @@ async function comprehensiveRuleEvaluation() {
     console.log('🔍 Comprehensive Rule Evaluation...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'premium_user',
-            userId: 'user456',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'premium_user',
+            'user456',
+            {
                 // User profile
                 plan: 'premium',
                 accountType: 'business',
@@ -88,9 +85,9 @@ async function comprehensiveRuleEvaluation() {
                 timezone: 'America/Los_Angeles',
                 campaign: 'summer_2024'
             }
-        });
+        );
 
-        console.log('Comprehensive rule result:', result.result);
+        console.log('Comprehensive rule result:', result);
         console.log('✅ Comprehensive rule evaluation completed');
     } catch (error) {
         console.error('❌ Comprehensive rule evaluation failed:', error.message);
@@ -108,19 +105,19 @@ async function premiumUserSegmentation() {
     console.log('👑 Premium User Segmentation...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'premium_user',
-            userId: 'user789',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'premium_user',
+            'user789',
+            {
                 plan: 'premium',
                 totalSpent: 5000,
                 orderCount: 25,
                 accountAge: 365, // days
                 isActive: true
             }
-        });
+        );
 
-        console.log('Is premium user:', result.result);
+        console.log('Is premium user:', result);
         console.log('✅ Premium user segmentation completed');
     } catch (error) {
         console.error('❌ Premium user segmentation failed:', error.message);
@@ -134,19 +131,19 @@ async function newUserSegmentation() {
     console.log('🆕 New User Segmentation...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'new_user',
-            userId: 'user101',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'new_user',
+            'user101',
+            {
                 signupDate: '2024-01-15',
                 isNewUser: true,
                 hasCompletedOnboarding: false,
                 usageCount: 5,
                 accountAge: 7 // days
             }
-        });
+        );
 
-        console.log('Is new user:', result.result);
+        console.log('Is new user:', result);
         console.log('✅ New user segmentation completed');
     } catch (error) {
         console.error('❌ New user segmentation failed:', error.message);
@@ -160,19 +157,19 @@ async function geographicSegmentation() {
     console.log('🌍 Geographic Segmentation...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'us_user',
-            userId: 'user202',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'us_user',
+            'user202',
+            {
                 location: 'US',
                 country: 'US',
                 state: 'CA',
                 city: 'San Francisco',
                 timezone: 'America/Los_Angeles'
             }
-        });
+        );
 
-        console.log('Is US user:', result.result);
+        console.log('Is US user:', result);
         console.log('✅ Geographic segmentation completed');
     } catch (error) {
         console.error('❌ Geographic segmentation failed:', error.message);
@@ -186,10 +183,10 @@ async function deviceSegmentation() {
     console.log('📱 Device Segmentation...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'mobile_user',
-            userId: 'user303',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'mobile_user',
+            'user303',
+            {
                 device: 'mobile',
                 os: 'iOS',
                 browser: 'Safari',
@@ -197,9 +194,9 @@ async function deviceSegmentation() {
                 screenWidth: 375,
                 screenHeight: 812
             }
-        });
+        );
 
-        console.log('Is mobile user:', result.result);
+        console.log('Is mobile user:', result);
         console.log('✅ Device segmentation completed');
     } catch (error) {
         console.error('❌ Device segmentation failed:', error.message);
@@ -217,18 +214,18 @@ async function premiumFeatureFlag() {
     console.log('⭐ Premium Feature Flag...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'show_premium_features',
-            userId: 'user404',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'show_premium_features',
+            'user404',
+            {
                 plan: 'premium',
                 hasCompletedOnboarding: true,
                 usageCount: 50,
                 isActive: true
             }
-        });
+        );
 
-        console.log('Show premium features:', result.result);
+        console.log('Show premium features:', result);
         console.log('✅ Premium feature flag completed');
     } catch (error) {
         console.error('❌ Premium feature flag failed:', error.message);
@@ -242,18 +239,18 @@ async function betaFeatureFlag() {
     console.log('🧪 Beta Feature Flag...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'show_beta_features',
-            userId: 'user505',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'show_beta_features',
+            'user505',
+            {
                 isBetaTester: true,
                 plan: 'premium',
                 hasOptedInBeta: true,
                 usageCount: 100
             }
-        });
+        );
 
-        console.log('Show beta features:', result.result);
+        console.log('Show beta features:', result);
         console.log('✅ Beta feature flag completed');
     } catch (error) {
         console.error('❌ Beta feature flag failed:', error.message);
@@ -267,18 +264,18 @@ async function abTestFeatureFlag() {
     console.log('🔬 A/B Test Feature Flag...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'new_ui_experiment',
-            userId: 'user606',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'new_ui_experiment',
+            'user606',
+            {
                 experimentGroup: 'treatment',
                 plan: 'premium',
                 location: 'US',
                 device: 'desktop'
             }
-        });
+        );
 
-        console.log('Show new UI:', result.result);
+        console.log('Show new UI:', result);
         console.log('✅ A/B test feature flag completed');
     } catch (error) {
         console.error('❌ A/B test feature flag failed:', error.message);
@@ -296,10 +293,10 @@ async function highValueCustomerRule() {
     console.log('💰 High Value Customer Rule...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'high_value_customer',
-            userId: 'user707',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'high_value_customer',
+            'user707',
+            {
                 totalSpent: 10000,
                 orderCount: 50,
                 averageOrderValue: 200,
@@ -307,9 +304,9 @@ async function highValueCustomerRule() {
                 plan: 'premium',
                 accountAge: 730 // 2 years
             }
-        });
+        );
 
-        console.log('Is high value customer:', result.result);
+        console.log('Is high value customer:', result);
         console.log('✅ High value customer rule completed');
     } catch (error) {
         console.error('❌ High value customer rule failed:', error.message);
@@ -323,10 +320,10 @@ async function churnRiskRule() {
     console.log('⚠️ Churn Risk Rule...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'churn_risk',
-            userId: 'user808',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'churn_risk',
+            'user808',
+            {
                 lastLoginDate: '2024-01-01',
                 daysSinceLastActivity: 30,
                 usageCount: 5,
@@ -334,9 +331,9 @@ async function churnRiskRule() {
                 hasSupportTickets: true,
                 satisfactionScore: 3
             }
-        });
+        );
 
-        console.log('Is at churn risk:', result.result);
+        console.log('Is at churn risk:', result);
         console.log('✅ Churn risk rule completed');
     } catch (error) {
         console.error('❌ Churn risk rule failed:', error.message);
@@ -350,10 +347,10 @@ async function upsellOpportunityRule() {
     console.log('📈 Upsell Opportunity Rule...');
 
     try {
-        const result = await datablit.rule.evalRule({
-            key: 'upsell_opportunity',
-            userId: 'user909',
-            params: {
+        const result = await datablit.rule.evalRule(
+            'upsell_opportunity',
+            'user909',
+            {
                 plan: 'basic',
                 usageCount: 80,
                 featureUsage: {
@@ -364,9 +361,9 @@ async function upsellOpportunityRule() {
                 accountAge: 180,
                 totalSpent: 500
             }
-        });
+        );
 
-        console.log('Is upsell opportunity:', result.result);
+        console.log('Is upsell opportunity:', result);
         console.log('✅ Upsell opportunity rule completed');
     } catch (error) {
         console.error('❌ Upsell opportunity rule failed:', error.message);
@@ -406,15 +403,15 @@ async function batchRuleEvaluation() {
         const results = {};
 
         for (const rule of rules) {
-            const result = await datablit.rule.evalRule({
-                key: rule.key,
-                userId: userId,
-                params: userParams
-            });
+            const result = await datablit.rule.evalRule(
+                rule.key,
+                userId,
+                userParams
+            );
 
             results[rule.key] = {
                 description: rule.description,
-                result: result.result
+                result: result
             };
         }
 
@@ -441,10 +438,7 @@ async function errorHandlingExamples() {
 
     // Test with invalid rule key
     try {
-        await datablit.rule.evalRule({
-            key: 'non_existent_rule',
-            userId: 'user123'
-        });
+        await datablit.rule.evalRule('non_existent_rule', 'user123');
     } catch (error) {
         console.log('Expected error for non-existent rule:', error.message);
     }
@@ -453,20 +447,14 @@ async function errorHandlingExamples() {
     try {
         const tempRule = new (await import('@datablit/datablit-js')).Rule();
         tempRule.setApiKey('invalid-key');
-        await tempRule.evalRule({
-            key: 'test_rule',
-            userId: 'user123'
-        });
+        await tempRule.evalRule('test_rule', 'user123');
     } catch (error) {
         console.log('Expected error for invalid API key:', error.message);
     }
 
     // Test with missing required parameters
     try {
-        await datablit.rule.evalRule({
-            key: 'fer'
-            // Missing userId
-        });
+        await datablit.rule.evalRule('fer');
     } catch (error) {
         console.log('Expected error for missing userId:', error.message);
     }
