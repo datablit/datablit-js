@@ -175,6 +175,7 @@ export class Datablit {
             method: "POST",
             headers: { "Content-Type": "application/json", "apiKey": this.apiKey },
             body: JSON.stringify(req),
+            keepalive: true,  // Ensures request completes even during page navigation
         })
             .then((response) => {
                 if (!response.ok) {
